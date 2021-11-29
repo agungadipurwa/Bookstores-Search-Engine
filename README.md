@@ -1,17 +1,17 @@
 <h1 align="center">Search Engine in Books Store</h2>
 
 ```
-A GUI based tkinter method in python that provides search ability from bookstores database.
+A Web Apps based streamlit module in python that provides search ability from bookstores database.
 ```
 
 ## Breakdown
-- GUI
-- Database
+- Web Apps
+- SQL Database
 - Searching
 - Tree
 
 ## Things Need
-- tkinter module
+- streamlit module
 - mysql_connector module
 - searching algorithme
 - tree algorithme
