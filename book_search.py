@@ -3,13 +3,11 @@ import pandas as pd
 
 list_book = []
 selected_book = []
-cari = {}
 func = {}
 loader = {}
 
-#untuk koneksi dengan database harus menyesuaikan dengan databas pada device maisng-masing
-"""
-DEVICE_AGUNG ADIPURWA dengan XAMPP
+#This database isn't you can custom based on what you have.
+#DEVICE_AGUNG ADIPURWA dengan XAMPP
 myDb = mysql.connector.connect(
     host="localhost",
     port="3306",
@@ -17,8 +15,8 @@ myDb = mysql.connector.connect(
     password="22032002",
     database="book_shop"
 )
-"""
-#DEVICE_SATYA
+
+"""DEVICE_SATYA
 myDb=mysql.connector.connect(
     host="127.0.0.1",
     port="3306",
@@ -26,7 +24,7 @@ myDb=mysql.connector.connect(
     password="2406",
     database="book_shop"
 )
-
+"""
 class Node:
     def __init__(self, book_id, title, author_name,
                  released_year, stock_quantity, price):
@@ -67,7 +65,7 @@ class Node:
         if self.right:
             self.right.traversePreOrder()
 
-    def searching(self):
+    def searching(self, cari):
         atriDic = {1: self.book_id, 2: self.title, 3: self.author_name, 4: self.released_year,
                    5: self.stock_quantity, 6: self.price}
         count = 0
@@ -82,22 +80,15 @@ class Node:
                 elif atriDic.get(key) == cari.get(key):
                     count += 1
 
-            #print(count)
-
             if count == len(cari):
-                #print("\n", self.book_id, self.title, self.author_name,
-                #self.released_year, self.stock_quantity, self.price)
                 loader = (self.book_id, self.title, self.author_name,
                           self.released_year, self.stock_quantity, self.price)
                 selected_book.append(loader)
-                #print(selected_book)
-
-            #print(key_list, count)
 
             if self.right:
-                self.right.searching()
+                self.right.searching(cari)
             if self.left:
-                self.left.searching()
+                self.left.searching(cari)
 
 
 def tableToList():
@@ -118,32 +109,33 @@ def listToBinaryTree():
 
     return root
 
-
 def select(choice_st,search_st):
     tableToList()
     root = listToBinaryTree()
+    cari = {}
     if choice_st == "Book Id":
         cari.update({1: int(search_st)})
-        root.searching()
+        root.searching(cari)
         df = pd.DataFrame(selected_book, columns=[
                 'Book ID', 'Title', 'Author', 'Released Year', 'Stock', 'Price'])
         df = df.drop_duplicates(keep='first')
 
     elif choice_st == "Title":
         cari.update({2: str(search_st)})
-        root.searching()
+        root.searching(cari)
         df = pd.DataFrame(selected_book, columns=[
                 'Book ID', 'Title', 'Author', 'Released Year', 'Stock', 'Price'])
         df = df.drop_duplicates(keep = 'first')
 
     elif choice_st == "Author":
         cari.update({3: str(search_st)})
-        root.searching()
+        root.searching(cari)
         df = pd.DataFrame(selected_book, columns=[
                 'Book ID', 'Title', 'Author', 'Released Year', 'Stock', 'Price'])
         df = df.drop_duplicates(keep='first')
-        
+
     for i in range(len(selected_book)):
        del selected_book[0]
-    
+
+    cari = {}
     return df
