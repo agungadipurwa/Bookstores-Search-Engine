@@ -18,8 +18,8 @@ def main():
             search_term = st.text_input(label = 'By')
         with nav3:
             st.text("Search")
-            sumbit_search = st.form_submit_button(label='Sumbit')
-    if sumbit_search:
+            submit_search = st.form_submit_button(label='submit')
+    if submit_search:
         #this code will use for get data after search and create them into dataframe
         df = select(choice_term, search_term)
         st.success("Your searched for {}".format(search_term))
