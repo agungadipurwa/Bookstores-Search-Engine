@@ -1,0 +1,4 @@
+streamli>=1.2.0
+pandas>=1.3.4
+mysql.connector>=2.2.9
+python>=3.9.1
