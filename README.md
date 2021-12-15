@@ -1,7 +1,7 @@
 <h1 align="center">Search Engine in Books Store</h2>
 
 ```
-A Web Apps based streamlit module in python that provides search ability from bookstores database.
+A Local Web Apps based streamlit module in python that provides search ability from bookstores database.
 ```
 
 ## Breakdown
