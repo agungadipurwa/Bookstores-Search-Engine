@@ -1,6 +1,6 @@
-CREATE gramedia_db;
+CREATE gramedia;
 
-USE gramedia_db;
+USE gramedia;
 
 CREATE TABLE books_db(book_id INT NOT NULL AUTO_INCREMENT,
 					title VARCHAR(50),
