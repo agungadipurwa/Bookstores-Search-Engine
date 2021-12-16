@@ -1,13 +1,13 @@
 import mysql.connector
 import pandas as pd
 
+
 list_book = []
 selected_book = []
 func = {}
 loader = {}
 
-#This database isn't you can custom based on what you have. So, you must use our database especialy the format of table.
-#DEVICE AGUNG ADIPURWA with XAMPP and phpmyadmin
+#This database isn't you can custom based on what you have.
 myDb = mysql.connector.connect(
     host="localhost",
     port="3306",
@@ -16,28 +16,6 @@ myDb = mysql.connector.connect(
     database="gramedia"
 )
 
-
-#DEVICE SATYA
-"""
-myDb=mysql.connector.connect(
-    host="127.0.0.1",
-    port="3306",
-    user="root",
-    password="2406",
-    database="book_shop"
-)
-"""
-
-#DEVICE DIRGA
-"""
-myDb=mysql.connector.connect(
-    host="127.0.0.1",
-    port="3306",
-    user="root",
-    password="2406",
-    database="book_shop"
-)
-"""
 
 class Node:
     def __init__(self, book_id, title, author_name,
@@ -120,6 +98,7 @@ def tableToList():
 
     for row in kursor:
         list_book.append(row)
+        #print(row)
     print(list_book)
 
 
@@ -137,7 +116,7 @@ def select(choice_st,search_st):
     tableToList()
     root = listToBinaryTree()
     cari = {}
-    if choice_st == "Book Id":
+    if choice_st == "Book ID":
         cari.update({1: int(search_st)})
         root.searching(cari)
         df = pd.DataFrame(selected_book, columns=[
