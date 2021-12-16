@@ -7,6 +7,8 @@ selected_book = []
 func = {}
 loader = {}
 
+#This database isn't you can custom based on what you have. So, you must use our database especialy the format of table.
+#DEVICE AGUNG ADIPURWA with XAMPP and phpmyadmin
 #This database isn't you can custom based on what you have.
 myDb = mysql.connector.connect(
     host="localhost",
@@ -16,6 +18,27 @@ myDb = mysql.connector.connect(
     database="gramedia"
 )
 
+#DEVICE SATYA
+"""
+myDb=mysql.connector.connect(
+    host="127.0.0.1",
+    port="3306",
+    user="root",
+    password="2406",
+    database="book_shop"
+)
+"""
+
+#DEVICE DIRGA
+"""
+myDb=mysql.connector.connect(
+    host="127.0.0.1",
+    port="3306",
+    user="root",
+    password="2406",
+    database="book_shop"
+)
+"""
 
 class Node:
     def __init__(self, book_id, title, author_name,
@@ -53,7 +76,6 @@ class Node:
          self.book_id = book_id
 
     def traversePreOrder(self):
-        print(self.book_id, end=' ')
         if self.left:
             self.left.traversePreOrder()
         if self.right:
@@ -74,17 +96,10 @@ class Node:
                 elif atriDic.get(key) == cari.get(key):
                     count += 1
 
-            #print(count)
-
             if count == len(cari):
-                #print("\n", self.book_id, self.title, self.author_name,
-                #self.released_year, self.stock_quantity, self.price)
                 loader = (self.book_id, self.title, self.author_name,
                           self.released_year, self.location, self.stock_quantity, self.price)
                 selected_book.append(loader)
-                #print(selected_book)
-
-            #print(key_list, count)
 
             if self.right:
                 self.right.searching(cari)
@@ -95,12 +110,8 @@ class Node:
 def tableToList():
     kursor = myDb.cursor()
     kursor.execute("SELECT*FROM books_db")
-
     for row in kursor:
         list_book.append(row)
-        #print(row)
-    print(list_book)
-
 
 def listToBinaryTree():
     root = Node(list_book[0][0], list_book[0][1], list_book[0][2], list_book[0][3],
